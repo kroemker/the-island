@@ -10,11 +10,11 @@
  *   bun run test-sprite assets/monsters/boss.png 80
  *
  * Width is in terminal columns (characters), not pixels. Default: 48.
- * The image is scaled proportionally to fit the given width.
+ * Transparency is handled correctly — the terminal background shows through.
  */
 
-import terminalImage from 'terminal-image';
 import { existsSync } from 'fs';
+import { renderSprite } from '../src/components/renderSprite.js';
 
 const imagePath = process.argv[2];
 const widthArg = process.argv[3];
@@ -42,9 +42,5 @@ if (isNaN(width) || width < 1) {
 console.log(`\nFile  : ${imagePath}`);
 console.log(`Width : ${width} columns\n`);
 
-const rendered = await terminalImage.file(imagePath, {
-  width,
-  preserveAspectRatio: true,
-});
-
+const rendered = await renderSprite(imagePath, width);
 console.log(rendered);

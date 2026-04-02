@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text } from 'ink';
-import terminalImage from 'terminal-image';
+import { renderSprite } from './renderSprite.js';
 
 type Props = {
   path: string;
@@ -12,8 +12,7 @@ export default function SpriteView({ path, width = 48 }: Props) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    terminalImage
-      .file(path, { width, preserveAspectRatio: true })
+    renderSprite(path, width)
       .then(setSprite)
       .catch(() => setError(`[sprite not found: ${path}]`));
   }, [path, width]);
