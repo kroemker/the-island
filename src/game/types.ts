@@ -69,6 +69,15 @@ export type GameState = {
   flags: Record<string, boolean>;
 };
 
+export type MessageType = 'narrator' | 'dialogue' | 'system' | 'combat' | 'loot';
+
+export type Message = {
+  id: string;
+  type: MessageType;
+  text: string;
+  speaker?: string;
+};
+
 export type Screen =
   | 'title'
   | 'prologue'
